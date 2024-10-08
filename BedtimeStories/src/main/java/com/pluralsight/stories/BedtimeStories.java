@@ -9,6 +9,13 @@ public class BedtimeStories {
 
         boolean done = false;
         do {
+            System.out.println("""
+                    Welcome to the Bedtime Stories App
+                    ----------------------------------
+                    This application allows you to enter a file name
+                    which will print its contents to the console
+                    ----------------------------------
+                    """);
             // Prompt the user for a file name
             System.out.println("Please enter the name of a file: ");
             Scanner inputScanner = new Scanner(System.in);
@@ -19,9 +26,13 @@ public class BedtimeStories {
             try {
                 fis = new FileInputStream(fileName);
             } catch (FileNotFoundException e) {
-                System.out.println("Invalid file name... try again");
-                continue;
-                //throw new RuntimeException(e);
+                System.out.println("Invalid file name... Would you like to try again? Enter y for yes or anything else to exit");
+                String input = inputScanner.nextLine().trim();
+                if (input.equalsIgnoreCase("y")) {
+                    continue;
+                } else {
+                    break;
+                }
             }
             Scanner fileScanner = new Scanner(fis);
             int lineNumber = 1;
@@ -35,5 +46,6 @@ public class BedtimeStories {
                 done = true;
             }
         } while (!done);
+        System.out.println("Exiting Application...");
     }
 }
