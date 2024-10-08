@@ -14,6 +14,11 @@ public class BedtimeStories {
                     ----------------------------------
                     This application allows you to enter a file name
                     which will print its contents to the console
+                    
+                    Stories to choose from: 
+                    -- goldilocks.txt
+                    -- hansel_and_gretel.txt
+                    -- mary_had_a_little_lamb.txt            
                     ----------------------------------
                     """);
             // Prompt the user for a file name
