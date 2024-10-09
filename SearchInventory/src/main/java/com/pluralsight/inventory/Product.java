@@ -15,10 +15,6 @@ public class Product {
         return id;
     }
 
-    @Override
-    public String toString() {
-        return String.format("Product ID: #%d. %s item costs $%.2f", id, item, price);
-    }
 
     public void setId(int id) {
         this.id = id;
@@ -38,5 +34,10 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Product ID: #%d. %s item costs $%.2f", id, item, price);
     }
 }
