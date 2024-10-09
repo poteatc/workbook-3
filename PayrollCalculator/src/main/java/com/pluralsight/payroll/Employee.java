@@ -78,8 +78,11 @@ public class Employee {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Employee e1 = new Employee("salkjlasdf", "asdlkfj", 10.0, 10.0);
+        employees.add(e1);
         for (Employee e : employees) {
-            System.out.printf("Employee #%s: %s's gross pay is $%.2f\n", e.getEmployeeId(), e.getName(), e.getGrossPay());
+            //System.out.printf("Employee #%s: %s's gross pay is $%.2f\n", e.getEmployeeId(), e.getName(), e.getGrossPay());
+            System.out.println(e);
         }
 
         //4. Copy the values from the tokens array into variables that match the data
@@ -87,5 +90,16 @@ public class Employee {
         //5. Display the employee using a printf and by calling the employee's
         //      getEmployeeId(), getName(), and getGrossPay() methods
         //6. Repeat for each line in the input file
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Employee #%s: %s's gross pay is $%.2f\n",  employeeId, name, getGrossPay());
+//        return "Employee{" +
+//                "employeeId='" + employeeId + '\'' +
+//                ", name='" + name + '\'' +
+//                ", hoursWorked=" + hoursWorked +
+//                ", payRate=" + payRate +
+//                '}';
     }
 }
