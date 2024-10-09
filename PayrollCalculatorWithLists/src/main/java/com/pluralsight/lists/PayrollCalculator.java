@@ -4,10 +4,13 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class PayrollCalculator {
     public static void main(String[] args) {
-        ArrayList<Employee> employees = new ArrayList<>();
+        //ArrayList<Employee> employees = new ArrayList<>();
+        Set<Employee> employees = new HashSet<>();
         try {
             // 1. Load the file using a FileReader object
             FileReader fileReader = new FileReader("./src/main/resources/employees.csv");
