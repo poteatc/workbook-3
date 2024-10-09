@@ -1,11 +1,11 @@
 package com.pluralsight.inventory;
 
-public class Inventory {
+public class Product {
     private int id;
     private String item;
     private double price;
 
-    public Inventory(int id, String item, double price) {
+    public Product(int id, String item, double price) {
         this.id = id;
         this.item = item;
         this.price = price;
@@ -13,6 +13,11 @@ public class Inventory {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Product ID: #%d. %s item costs $%.2f", id, item, price);
     }
 
     public void setId(int id) {
