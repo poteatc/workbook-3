@@ -52,54 +52,10 @@ public class Employee {
     public double getGrossPay() {
         return hoursWorked * payRate;
     }
-    public static void main(String[] args) {
-        ArrayList<Employee> employees = new ArrayList<>();
-        try {
-            // 1. Load the file using a FileReader object
-            FileReader fileReader = new FileReader("./src/main/resources/employees.csv");
-            // create a BufferedReader to manage input stream
-            BufferedReader bufReader = new BufferedReader(fileReader);
-            String input;
-            // 2. Read each line of text
-            // Ignore first line of employee.csv file
-            bufReader.readLine();
-            while((input = bufReader.readLine()) != null) {
-                //System.out.println(input);
-                // 3. Split it into individual fields using the | character as the delimiter
-                String[] fields = input.split("[|]");
-                //System.out.println(fields);
-                employees.add(new Employee(fields[0], fields[1], Double.parseDouble(fields[2]), Double.parseDouble(fields[3])));
-//                for (String s : fields) {
-//                    System.out.println(s);
-//                }
-            }
-            // close the stream and release the resources
-            bufReader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Employee e1 = new Employee("salkjlasdf", "asdlkfj", 10.0, 10.0);
-        employees.add(e1);
-        for (Employee e : employees) {
-            //System.out.printf("Employee #%s: %s's gross pay is $%.2f\n", e.getEmployeeId(), e.getName(), e.getGrossPay());
-            System.out.println(e);
-        }
 
-        //4. Copy the values from the tokens array into variables that match the data
-        //      and then use them to create a new Employee object
-        //5. Display the employee using a printf and by calling the employee's
-        //      getEmployeeId(), getName(), and getGrossPay() methods
-        //6. Repeat for each line in the input file
-    }
 
     @Override
     public String toString() {
         return String.format("Employee #%s: %s's gross pay is $%.2f\n",  employeeId, name, getGrossPay());
-//        return "Employee{" +
-//                "employeeId='" + employeeId + '\'' +
-//                ", name='" + name + '\'' +
-//                ", hoursWorked=" + hoursWorked +
-//                ", payRate=" + payRate +
-//                '}';
     }
 }
