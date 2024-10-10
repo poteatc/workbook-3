@@ -20,11 +20,13 @@ public class App {
         String writeFile = path + scanner.nextLine();
         writeToFile(writeFile);
 
+        // printEmployeesToConsole()
+    }
 
-        // Print employees to console
-//        for (Employee e : getEmployeesFromFile()) {
-//            System.out.println(e);
-//        }
+    private static void printEmployeesToConsole() {
+        for (Employee e : employees) {
+            System.out.println(e);
+       }
     }
 
     private static void writeToFile(String fileName) {
@@ -49,19 +51,18 @@ public class App {
     }
 
     private static ArrayList<Employee> getEmployeesFromFile(String fileName) {
-        ArrayList<Employee> employees = new ArrayList<>();
+        employees = new ArrayList<>();
         try {
-            // 1. Load the file using a FileReader object
             FileReader fileReader = new FileReader(fileName);
             // create a BufferedReader to manage input stream
             BufferedReader bufReader = new BufferedReader(fileReader);
             String input;
-            // 2. Read each line of text
+
             // Ignore first line of employee.csv file
             bufReader.readLine();
             while((input = bufReader.readLine()) != null) {
                 //System.out.println(input);
-                // 3. Split it into individual fields using the | character as the delimiter
+                // Split input into individual fields using the | character as the delimiter
                 String[] fields = input.split("[|]");
                 //System.out.println(fields);
                 employees.add(new Employee(fields[0], fields[1], Double.parseDouble(fields[2]), Double.parseDouble(fields[3])));

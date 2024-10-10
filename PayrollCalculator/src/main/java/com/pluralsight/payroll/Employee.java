@@ -1,14 +1,13 @@
 package com.pluralsight.payroll;
 
-import java.io.*;
-import java.util.ArrayList;
-
 public class Employee {
-    private String employeeId;
-    private String name;
-    private double hoursWorked;
-    private double payRate;
+    // Private fields for employee details
+    private String employeeId;   // Unique identifier for the employee
+    private String name;         // Employee's name
+    private double hoursWorked;  // Hours worked by the employee
+    private double payRate;      // Hourly pay rate for the employee
 
+    // Constructor to initialize the employee's details
     public Employee(String employeeId, String name, double hoursWorked, double payRate) {
         this.employeeId = employeeId;
         this.name = name;
@@ -16,6 +15,7 @@ public class Employee {
         this.payRate = payRate;
     }
 
+    // Getter and setter for employeeId
     public String getEmployeeId() {
         return employeeId;
     }
@@ -24,6 +24,7 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
+    // Getter and setter for name
     public String getName() {
         return name;
     }
@@ -32,6 +33,7 @@ public class Employee {
         this.name = name;
     }
 
+    // Getter and setter for hours worked
     public double getHoursWorked() {
         return hoursWorked;
     }
@@ -40,6 +42,7 @@ public class Employee {
         this.hoursWorked = hoursWorked;
     }
 
+    // Getter and setter for pay rate
     public double getPayRate() {
         return payRate;
     }
@@ -47,15 +50,17 @@ public class Employee {
     public void setPayRate(double payRate) {
         this.payRate = payRate;
     }
-    //calculates and returns that employee's gross pay
-    //based on their hours worked and pay rate
+
+    // Calculates and returns the employee's gross pay
+    // Gross pay is simply hours worked multiplied by the pay rate
     public double getGrossPay() {
         return hoursWorked * payRate;
     }
 
-
+    // Overrides the toString() method to display the employee's details in a formatted string
+    // Displays employee's ID, name, and gross pay (rounded to 2 decimal places)
     @Override
     public String toString() {
-        return String.format("Employee #%s: %s's gross pay is $%.2f\n",  employeeId, name, getGrossPay());
+        return String.format("Employee #%s: %s's gross pay is $%.2f",  employeeId, name, getGrossPay());
     }
 }
