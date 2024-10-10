@@ -43,7 +43,9 @@ public class FormatDates {
 //        currentTime = dateTime.format(calendar.getTime());
         // 5:02 on 05-Sep-2021
         //System.out.println(ZoneId.getAvailableZoneIds().contains("Etc/GMT+4"));
-        now = LocalDateTime.now(ZoneId.of("America/New_York"));
+
+        //now = LocalDateTime.now(ZoneId.of("America/New_York"));
+        now = LocalDateTime.now(ZoneId.of("-04:00"));
         DateTimeFormatter timeFmt = DateTimeFormatter.ofPattern(now.format(DateTimeFormatter.ofPattern("H:mm")));
         fmt = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
         System.out.print(timeFmt.format(now) + " on " + fmt.format(now));
