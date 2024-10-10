@@ -2,6 +2,9 @@ package com.pluralsight.dates;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.TimeZone;
@@ -22,22 +25,27 @@ public class FormatDates {
         System.out.println(fmt.format(ld));
 
         // print date and GMT time
-        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
-        DateFormat dateTime = new SimpleDateFormat("HH:mm");
-        // Change time zone to GMT
-        dateTime.setTimeZone(TimeZone.getTimeZone("GMT"));
-        String currentTime = dateTime.format(calendar.getTime());
-        fmt = DateTimeFormatter.ofPattern("EEEE, MMM dd, yyyy " + currentTime);
-        System.out.println(fmt.format(ld));
+//        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+//        DateFormat dateTime = new SimpleDateFormat("HH:mm");
+//        // Change time zone to GMT
+//        dateTime.setTimeZone(TimeZone.getTimeZone("GMT"));
+//        String currentTime = dateTime.format(calendar.getTime());
+
+        //Easiest way to change time zone
+        LocalDateTime now = LocalDateTime.now(ZoneId.of("UTC"));
+        fmt = DateTimeFormatter.ofPattern("EEEE, MMM dd, yyyy KK:mm");
+        System.out.println(fmt.format(now));
 
         // Change time format
-        dateTime = new SimpleDateFormat("H:mm");
-        calendar = Calendar.getInstance(TimeZone.getTimeZone("EST"));
-        dateTime.format(calendar.getTime());
-        currentTime = dateTime.format(calendar.getTime());
+//        dateTime = new SimpleDateFormat("H:mm");
+//        calendar = Calendar.getInstance(TimeZone.getTimeZone("EST"));
+//        dateTime.format(calendar.getTime());
+//        currentTime = dateTime.format(calendar.getTime());
         // 5:02 on 05-Sep-2021
-        DateTimeFormatter timeFmt = DateTimeFormatter.ofPattern(currentTime);
+        //System.out.println(ZoneId.getAvailableZoneIds().contains("Etc/GMT+4"));
+        now = LocalDateTime.now(ZoneId.of("America/New_York"));
+        DateTimeFormatter timeFmt = DateTimeFormatter.ofPattern(now.format(DateTimeFormatter.ofPattern("H:mm")));
         fmt = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
-        System.out.print(timeFmt.format(ld) + " on " + fmt.format(ld));
+        System.out.print(timeFmt.format(now) + " on " + fmt.format(now));
     }
 }
