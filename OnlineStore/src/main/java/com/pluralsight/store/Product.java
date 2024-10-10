@@ -58,8 +58,7 @@ public class Product {
                 Product Name: %s
                 SDK: %s
                 Price: $%.2f
-                Department: %s
-                """, productName, sdk, price, department);
+                Department: %s""", productName, sdk, price, department);
     }
 }
 
