@@ -1,0 +1,6 @@
+2024-10-10 00:24:50 launch
+2024-10-10 00:24:52 search : asldkjfsda
+2024-10-10 00:24:54 search : akdjflksdjaf
+2024-10-10 00:24:55 search : aslkjf
+2024-10-10 00:24:57 search : akfdjsa
+2024-10-10 00:24:58 exit
