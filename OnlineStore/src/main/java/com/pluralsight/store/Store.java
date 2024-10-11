@@ -1,9 +1,6 @@
 package com.pluralsight.store;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -210,6 +207,11 @@ public class Store {
                     } catch (Exception e) {
                         System.out.println("Please enter valid input (0.00)...");
                     }
+                    System.out.println("Would you like to return to Check Out Menu? Enter 'Y' for yes or any other key for no");
+                    input = scanner.nextLine().toLowerCase().trim();
+                    if (input.equalsIgnoreCase("y")) {
+                        break;
+                    }
                 } while (!validInput);
 
             }
@@ -219,18 +221,37 @@ public class Store {
     private static void printSalesReceipt(double cash, double totalPrice) {
         LocalDateTime ldt = LocalDateTime.now();
        //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddhhmm");
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMMM dd, yyyy hh:mm:ss");
-        System.out.println(ConsoleColors.WHITE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD + "\nDate: " + dtf.format(ldt));
+        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("MMMM dd, yyyy hh:mm:ss a");
+        System.out.println("\n" + ConsoleColors.WHITE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD + "Date: " + dtf1.format(ldt));
         System.out.println(ConsoleColors.WHITE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD + "Thank you for ordering from our online store!!!");
-        System.out.println(ConsoleColors.WHITE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD + "Here is your receipt: ");
+        System.out.println(ConsoleColors.WHITE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_UNDERLINED + "Here is your receipt:");
+        System.out.print(ConsoleColors.RESET);
         for (Product p : cart) {
-            System.out.format("%-40s $%.2f", p.getProductName(), p.getPrice());
+            System.out.format(ConsoleColors.WHITE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD + "\n%-40s $%.2f\n", p.getProductName(), p.getPrice());
         }
-        cart.removeAll(cart);
         System.out.format("\n%-40s $%.2f", "Sales Total:", totalPrice);
         System.out.format("\n%-40s $%.2f", "Amount Paid:", cash);
         System.out.format("\n%-40s $%.2f\n", "Change:", (cash - totalPrice));
         System.out.println(ConsoleColors.RESET);
+        try {
+            DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("yyyyMMddhhmm");
+            String fileName = "./src/main/resources/Receipts/" + dtf2.format(ldt) + ".txt";
+            FileWriter fileWriter = new FileWriter(fileName);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(String.format("Date: %s\n", dtf1.format(ldt)));
+            bufferedWriter.write("Thank you for ordering from our online store!!!\n");
+            bufferedWriter.write("Here is your receipt:\n");
+            for (Product p : cart) {
+                bufferedWriter.write(String.format("\n%-40s $%.2f\n", p.getProductName(), p.getPrice()));
+            }
+            bufferedWriter.write(String.format("\n%-40s $%.2f", "Sales Total:", totalPrice));
+            bufferedWriter.write(String.format("\n%-40s $%.2f", "Amount Paid:", cash));
+            bufferedWriter.write(String.format("\n%-40s $%.2f\n", "Change:", (cash - totalPrice)));
+            bufferedWriter.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        cart.removeAll(cart);
     }
 
     private static void addProductToCart() {
