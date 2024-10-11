@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -192,15 +194,43 @@ public class Store {
             System.out.println("\nAre you ready to check out? Enter 'Y' for yes or any other key for no");
             String input = scanner.nextLine().toLowerCase().trim();
             if (input.equalsIgnoreCase("y")) {
-                System.out.println("\nThank you for ordering from our online store!!!");
-                System.out.println("Here is your receipt: ");
-                for (Product p : cart) {
-                    System.out.println(p.getProductName() + ": $" + p.getPrice());
-                }
-                cart.removeAll(cart);
-                System.out.println("Total: $" + totalPrice + "\n\n");
+                boolean validInput = false;
+                do {
+                    System.out.println("Please enter your payment in cash: ");
+                    double cash = 0.0;
+                    input = scanner.nextLine().trim();
+                    try {
+                        cash = Double.parseDouble(input);
+                        if (cash >= totalPrice) {
+                            printSalesReceipt(cash, totalPrice);
+                            validInput = true;
+                        } else {
+                            System.out.println("Your payment amount is not sufficient...");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Please enter valid input (0.00)...");
+                    }
+                } while (!validInput);
+
             }
         }
+    }
+
+    private static void printSalesReceipt(double cash, double totalPrice) {
+        LocalDateTime ldt = LocalDateTime.now();
+       //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddhhmm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMMM dd, yyyy hh:mm:ss");
+        System.out.println(ConsoleColors.WHITE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD + "\nDate: " + dtf.format(ldt));
+        System.out.println(ConsoleColors.WHITE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD + "Thank you for ordering from our online store!!!");
+        System.out.println(ConsoleColors.WHITE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD + "Here is your receipt: ");
+        for (Product p : cart) {
+            System.out.format("%-40s $%.2f", p.getProductName(), p.getPrice());
+        }
+        cart.removeAll(cart);
+        System.out.format("\n%-40s $%.2f", "Sales Total:", totalPrice);
+        System.out.format("\n%-40s $%.2f", "Amount Paid:", cash);
+        System.out.format("\n%-40s $%.2f\n", "Change:", (cash - totalPrice));
+        System.out.println(ConsoleColors.RESET);
     }
 
     private static void addProductToCart() {
