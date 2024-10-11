@@ -22,12 +22,13 @@ public class Store {
         boolean done = false;
         do {
             System.out.print(ConsoleColors.BLUE_BOLD + """
+                    
                     ***************************
                     *    Store Home Screen    *
                     ***************************
                     """ + ConsoleColors.RESET);
             String prompt = ConsoleColors.CYAN_UNDERLINED + """
-                    Please enter an option:\n""" + ConsoleColors.WHITE_BRIGHT +
+                    Please enter an option:\n""" + ConsoleColors.RESET + ConsoleColors.WHITE_BOLD_BRIGHT +
                     """ 
                     A) View all products
                     B) View Cart
@@ -43,11 +44,11 @@ public class Store {
                     viewCart();
                     break;
                 case "x":
-                    System.out.println("Exiting application...");
+                    System.out.println(ConsoleColors.RED_BOLD_BRIGHT + "Exiting application..." + ConsoleColors.RESET);
                     done = true;
                     break;
                 default:
-                    System.out.println("Please enter a valid option... ");
+                    System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT + "Please enter a valid option... " + ConsoleColors.RESET);
                     break;
             }
 
@@ -82,23 +83,21 @@ public class Store {
             String input = scanner.nextLine().toLowerCase().trim();
             switch (input) {
                 case "a":
-                    System.out.println("Please enter the product name: ");
+                    System.out.println(ConsoleColors.CYAN_BOLD_BRIGHT + "Please enter the product name: " + ConsoleColors.RESET);
                     input = scanner.nextLine().trim();
                     searchByProductName(input);
                     break;
                 case "b":
-                    System.out.println("Please enter the price of the product (ex. 0.00): ");
+                    System.out.println(ConsoleColors.GREEN_BOLD + "Please enter the price of the product (ex. 0.00): " + ConsoleColors.RESET);
                     input = scanner.nextLine().trim();
                     searchByPrice(input);
                     break;
                 case "c":
-                    System.out.println("Please enter the name of the department: ");
+                    System.out.println(ConsoleColors.YELLOW_BOLD_BRIGHT + "Please enter the name of the department: " + ConsoleColors.RESET);
                     input = scanner.nextLine().trim();
                     searchByDepartment(input);
                     break;
                 case "d":
-                    //System.out.println("Please enter the name of the product to add to your cart");
-                    //input = scanner.nextLine().trim();
                     addProductToCart();
                     break;
                 case "x":
@@ -106,7 +105,7 @@ public class Store {
                     done = true;
                     break;
                 default:
-                    System.out.println("Please enter a valid option... ");
+                    System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT + "Please enter a valid option... " + ConsoleColors.RESET);
                     break;
             }
         } while (!done);
@@ -128,13 +127,13 @@ public class Store {
     private static void viewCart() {
         boolean done = false;
         do {
-            System.out.println("""
+            System.out.println(ConsoleColors.YELLOW_BOLD_BRIGHT + """
                 ***************************
                 *        Your Cart        *
                 ***************************
-                """);
+                """ + ConsoleColors.RESET);
             if (cart.isEmpty()) {
-                System.out.println("Your cart is empty...\n");
+                System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT + "Your cart is empty...\n" + ConsoleColors.RESET);
             }
             for (Product p : cart) {
                 System.out.println("""
@@ -144,8 +143,9 @@ public class Store {
                             (~~~~~~~~~~~~~~)
                             """);
             }
-            System.out.println("""
-                    Please enter an option:
+            System.out.println(ConsoleColors.CYAN_UNDERLINED + """
+                    
+                    Please enter an option:\n""" + ConsoleColors.RESET + ConsoleColors.WHITE_BOLD_BRIGHT + """
                     A) Check Out
                     B) Remove Product from Cart
                     X) Return to Store Home Screen
@@ -162,7 +162,7 @@ public class Store {
                     done = true;
                     break;
                 default:
-                    System.out.println("Please enter a valid option... ");
+                    System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT + "Please enter a valid option... " + ConsoleColors.WHITE_BOLD_BRIGHT);
                     break;
             }
         } while (!done);
@@ -171,12 +171,12 @@ public class Store {
 
     private static void checkOut() {
         if (!cart.isEmpty()) {
-            System.out.println("""
+            System.out.println(ConsoleColors.RED_BOLD_BRIGHT + """
                 \n
                 ***************************
                 *        Check Out        *
                 ***************************
-                    """);
+                """ + ConsoleColors.RESET);
             double totalPrice = 0.0;
             for (Product p : cart) {
                 System.out.println("""
@@ -187,13 +187,15 @@ public class Store {
                             """);
                 totalPrice += p.getPrice();
             }
-            System.out.println("The total sales amount of your cart is $" + totalPrice);
-            System.out.println("\nAre you ready to check out? Enter 'Y' for yes or any other key for no");
+            System.out.printf(ConsoleColors.WHITE_BOLD_BRIGHT + "The total sales amount of your cart is "
+                    + ConsoleColors.PURPLE_BOLD_BRIGHT + "$%.2f", totalPrice);
+            System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + "\nAre you ready to check out? "
+                    + ConsoleColors.GREEN_BOLD_BRIGHT + "Enter 'Y' for yes or any other key for no" + ConsoleColors.RESET);
             String input = scanner.nextLine().toLowerCase().trim();
             if (input.equalsIgnoreCase("y")) {
                 boolean validInput = false;
                 do {
-                    System.out.println("Please enter your payment in cash: ");
+                    System.out.println(ConsoleColors.BLUE_BOLD_BRIGHT + "Please enter your payment in cash: " + ConsoleColors.RESET);
                     double cash = 0.0;
                     input = scanner.nextLine().trim();
                     try {
@@ -202,12 +204,13 @@ public class Store {
                             printSalesReceipt(cash, totalPrice);
                             validInput = true;
                         } else {
-                            System.out.println("Your payment amount is not sufficient...");
+                            System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT + "Your payment amount is not sufficient..." + ConsoleColors.RESET);
                         }
                     } catch (Exception e) {
-                        System.out.println("Please enter valid input (0.00)...");
+                        System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT + "Please enter valid input (0.00)..." + ConsoleColors.RESET);
                     }
-                    System.out.println("Would you like to return to Check Out Menu? Enter 'Y' for yes or any other key for no");
+                    System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + "Would you like to return to Check Out Menu?"
+                            + ConsoleColors.GREEN_BOLD_BRIGHT + " Enter 'Y' for yes or any other key for no" + ConsoleColors.RESET);
                     input = scanner.nextLine().toLowerCase().trim();
                     if (input.equalsIgnoreCase("y")) {
                         break;
@@ -258,7 +261,9 @@ public class Store {
         boolean found = false;
         boolean done = false;
         do {
-            System.out.println("Please enter the product name or SDK");
+            System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + "\nPlease enter the "
+                    + ConsoleColors.CYAN_BOLD_BRIGHT + "product name " + ConsoleColors.WHITE_BOLD_BRIGHT + "or "
+                    + ConsoleColors.RED_BOLD_BRIGHT + "SDK" + ConsoleColors.RESET);
             String input = scanner.nextLine().toLowerCase().trim();
             // Can throw ConcurrentModificationException
             // Solution: use a CopyOnWriteArrayList
@@ -270,7 +275,8 @@ public class Store {
             for (Product p : copy) {
                 if (input.equalsIgnoreCase(p.getProductName()) || input.equalsIgnoreCase(p.getSdk())) {
                     found = true;
-                    System.out.println("Added " + p.getProductName() + " to your cart!\n");
+                    System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + "\nAdded " + ConsoleColors.CYAN_BOLD_BRIGHT + p.getProductName()
+                            + ConsoleColors.WHITE_BOLD_BRIGHT + " to your cart!\n" + ConsoleColors.RESET);
                     cart.add(p);
                     inventory.remove(p);
                     done = true;
@@ -278,8 +284,9 @@ public class Store {
                 }
             }
             if (!found) {
-                System.out.println("Invalid product name...");
-                System.out.println("Would you like to enter the product name or sdk again? Enter 'Y' for yes or any other key for no.");
+                System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT + "Invalid product name..." + ConsoleColors.RESET);
+                System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + "Would you like to enter the product name or sdk again?"
+                        + ConsoleColors.GREEN_BOLD_BRIGHT + " Enter 'Y' for yes or any other key for no." + ConsoleColors.RESET);
                 input = scanner.nextLine().trim();
                 if (!input.equalsIgnoreCase("y")) {
                     done = true;
@@ -290,13 +297,14 @@ public class Store {
 
     private static void removeProductFromCart() {
         if (cart.isEmpty()) {
-            System.out.println("There is nothing to remove from your cart...\n");
+            System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT + "There is nothing to remove from your cart...\n" + ConsoleColors.RESET);
             return;
         }
         boolean found = false;
         boolean done = false;
         do {
-            System.out.println("Please enter the product name or SDK");
+            System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + "Please enter the " + ConsoleColors.CYAN_BOLD_BRIGHT
+                    + "product name " + ConsoleColors.WHITE_BOLD_BRIGHT + "or " + ConsoleColors.RED_BOLD_BRIGHT + "SDK" + ConsoleColors.RESET);
             String input = scanner.nextLine().toLowerCase().trim();
             // Can throw ConcurrentModificationException
             // Solution: use a CopyOnWriteArrayList
@@ -308,7 +316,8 @@ public class Store {
             for (Product p : copy) {
                 if (input.equalsIgnoreCase(p.getProductName()) || input.equalsIgnoreCase(p.getSdk())) {
                     found = true;
-                    System.out.println("Removed " + p.getProductName() + " from your cart!\n");
+                    System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + "\nRemoved " + ConsoleColors.CYAN_BOLD_BRIGHT
+                            + p.getProductName() + ConsoleColors.WHITE_BOLD_BRIGHT + " from your cart!\n" + ConsoleColors.RESET);
                     cart.remove(p);
                     inventory.add(p);
                     done = true;
@@ -316,8 +325,9 @@ public class Store {
                 }
             }
             if (!found) {
-                System.out.println("Invalid product name...");
-                System.out.println("Would you like to enter a product name again? Enter 'Y' for yes or any other key for no.");
+                System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT + "Invalid product name..." + ConsoleColors.RESET);
+                System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + "Would you like to enter the product name or sdk again?"
+                        + ConsoleColors.GREEN_BOLD_BRIGHT + " Enter 'Y' for yes or any other key for no." + ConsoleColors.RESET);
                 input = scanner.nextLine().trim();
                 if (!input.equalsIgnoreCase("y")) {
                     done = true;
@@ -371,11 +381,11 @@ public class Store {
                     }
                 }
                 if (!found) {
-                    System.out.println("There are no products with that price...\n");
+                    System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT + "There are no products with that price...\n" + ConsoleColors.RESET);
                     done = true;
                 }
             } catch (Exception e) {
-                System.out.println("Please enter a valid price in the format: 0.00\n");
+                System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT + "Please enter a valid price in the format: 0.00\n" + ConsoleColors.RESET);
                 done = true;
             }
         } while (!done);
@@ -399,7 +409,7 @@ public class Store {
         }
 
         if (!found) {
-            System.out.println("We couldn't find any products by that name...");
+            System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT + "We couldn't find any products by that name..." + ConsoleColors.WHITE_BOLD_BRIGHT);
         }
     }
 
