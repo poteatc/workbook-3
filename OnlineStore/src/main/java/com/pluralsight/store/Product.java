@@ -20,6 +20,10 @@ public class Product {
         return sdk;
     }
 
+    public String getSdkStringColored() {
+        return ConsoleColors.WHITE_BOLD_BRIGHT + sdk + ConsoleColors.RESET;
+    }
+
     public void setSdk(String sdk) {
         this.sdk = sdk;
     }
@@ -27,6 +31,10 @@ public class Product {
     // Getter and setter for the product name
     public String getProductName() {
         return productName;
+    }
+
+    public String getProductNameColored() {
+        return ConsoleColors.WHITE_BOLD_BRIGHT + productName + ConsoleColors.RESET;
     }
 
     public void setProductName(String productName) {
@@ -38,6 +46,10 @@ public class Product {
         return price;
     }
 
+    public String getPriceStringColored() {
+        return ConsoleColors.WHITE_BOLD_BRIGHT + String.format("$%.2f", price) + ConsoleColors.RESET;
+    }
+
     public void setPrice(double price) {
         this.price = price;
     }
@@ -47,6 +59,11 @@ public class Product {
         return department;
     }
 
+    // Getter and setter for the department
+    public String getDepartmentStringColored() {
+        return ConsoleColors.WHITE_BOLD_BRIGHT + department + ConsoleColors.RESET;
+    }
+
     public void setDepartment(String department) {
         this.department = department;
     }
@@ -54,11 +71,15 @@ public class Product {
     // Overrides the toString() method to provide a formatted string representation of the product
     @Override
     public String toString() {
-        return String.format("""
+        return String.format(ConsoleColors.CYAN_BOLD_BRIGHT + """
                 Product Name: %s
+                """ + ConsoleColors.RED_BOLD + """
                 SDK: %s
-                Price: $%.2f
-                Department: %s""", productName, sdk, price, department);
+                """ + ConsoleColors.GREEN_BOLD_BRIGHT + """
+                Price: %s
+                """ + ConsoleColors.YELLOW_BOLD_BRIGHT + """
+                Department: %s""",
+                getProductNameColored(), getSdkStringColored(), getPriceStringColored(), getDepartmentStringColored());
     }
 }
 
