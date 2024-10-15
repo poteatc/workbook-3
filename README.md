@@ -38,3 +38,23 @@ Each product in the store is represented by an instance of the `Product` class, 
 3. **Cart Viewing**: Users can view the contents of their cart, check out, or remove items.
 
 4. **Checkout Process**: During checkout, the user provides payment information. A detailed receipt is printed to the console and saved to a file.
+
+   ## DEMO
+   Home Page: 
+   ![image](https://github.com/user-attachments/assets/53c08b06-ea6a-475a-bd80-e71c9f0c4b84)
+
+   Products Display Screen:
+   ![image](https://github.com/user-attachments/assets/e2e0b8a7-85dc-46cb-b6f3-c96c3f85fb82)
+   ![image](https://github.com/user-attachments/assets/de5eb8b2-b655-49b3-ba66-5c82f0d04593)
+
+   Invalid Input Example:
+   ![image](https://github.com/user-attachments/assets/2056d19f-bf4b-4a17-8cd1-4c0c03a6e669)
+
+   Interesting Code:
+   ![image](https://github.com/user-attachments/assets/733e3126-b1bb-4af2-98df-22e1daf92d00)
+   ![image](https://github.com/user-attachments/assets/c49dd6d0-3253-4bc1-8f42-bbf3e696716f)
+   This code calculates the total amount due for products in the cart, then generates a receipt that is printed to the console
+
+
+
+
